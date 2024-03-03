@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}login{% endblock title %}
+{% block navcontent %}
+<a href="/">home</a>
+{% endblock navcontent %}
+{% block content %}
+<h1>
+    Login
+</h1>
+don't have an account ? <a href="/register">register</a>
+
+<form method="POST" autocomplete="off">
+    {% csrf_token %}
+
+    {{loginform.as_p}}
+
+    <input type="submit" value="register">
+</form>
+{% endblock content %}

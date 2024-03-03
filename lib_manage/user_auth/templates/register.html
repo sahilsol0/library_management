@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}register{% endblock title %}
+{% block navcontent %}
+<a href="/">home</a>
+{% endblock navcontent %}
+{% block content %}
+<h1>new user register</h1>
+already have an account ? <a href="/login">login</a>
+<form method="POST" autocomplete="off">
+    {% csrf_token %}
+
+    {{registerform.as_p}}
+    
+    <input type="submit" value="register">
+</form>
+{% endblock content %}

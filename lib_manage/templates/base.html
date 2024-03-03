@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<script>
+	{% if messages %}
+		{% for message in messages %}
+			alert("{{message}}")
+		{% endfor %}
+	{% endif %}
+</script>
+<body>
+    <nav>
+        {% block navcontent %}{% endblock navcontent %}
+    </nav>
+    {% block content %}{% endblock content %}
+</body>
+</html>

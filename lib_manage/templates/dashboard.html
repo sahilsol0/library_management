@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}dashboard{% endblock title %}
+{% block navcontent %}
+<a href="/">logout</a>
+{% endblock navcontent %}
+{% block content %}
+<h1>
+    {% if user.is_authenticated %}
+        <h1>welcome {{user.username}}</h1>
+    {% endif %}
+</h1>
+{% endblock content %}
