@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}home{% endblock title %}
-{% block navcontent %}
-<a href="/register">register</a>
-<a href="/login">login</a>
-{% endblock navcontent %}
+{% include "navbar.html" %}
 {% block content %}
 <h1>
     This is the home page
