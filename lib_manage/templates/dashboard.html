@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block title %}dashboard{% endblock title %}
-{% block navcontent %}
-<a href="/">logout</a>
-{% endblock navcontent %}
+{% block navlinks %}
+<a class="mr-5 hover:text-white" href="/dashboard">home</a>
+<a class="mr-5 hover:text-white" href="/">logout</a>
+{% endblock navlinks %}
 {% block content %}
 <h1>
     {% if user.is_authenticated %}
