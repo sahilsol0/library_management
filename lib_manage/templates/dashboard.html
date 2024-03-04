@@ -2,8 +2,8 @@
 
 {% block title %}dashboard{% endblock title %}
 {% block navlinks %}
-<a class="mr-5 hover:text-white" href="/dashboard">home</a>
-<a class="mr-5 hover:text-white" href="/">logout</a>
+<a class="mr-5 hover:text-white" href="{% url 'home' %}">home</a>
+<a class="mr-5 hover:text-white" href="{% url 'logout' %}">logout</a>
 {% endblock navlinks %}
 {% block content %}
 <h1>

@@ -7,13 +7,13 @@
 <h1>
     Login
 </h1>
-don't have an account ? <a href="/register">register</a>
+don't have an account ? <a href="{% url 'login' %}">register</a>
 
 <form method="POST" autocomplete="off">
     {% csrf_token %}
 
     {{loginform.as_p}}
 
-    <input type="submit" value="Login">
+    <input class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg" href="{% url 'login' %}" type="submit" value="Login">
 </form>
 {% endblock content %}

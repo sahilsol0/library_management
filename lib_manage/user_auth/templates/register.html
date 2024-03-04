@@ -5,12 +5,12 @@
 {% endblock navcontent %}
 {% block content %}
 <h1>new user register</h1>
-already have an account ? <a href="/login">login</a>
+already have an account ? <a href="{% url 'login' %}">login</a>
 <form method="POST" autocomplete="off">
     {% csrf_token %}
 
     {{registerform.as_p}}
     
-    <input type="submit" value="register">
+    <input class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg"  type="submit" value="register">
 </form>
 {% endblock content %}

@@ -33,3 +33,8 @@ def user_login(request):
                 return redirect('dashboard')
     context = {'loginform':form}
     return render(request, 'login.html',context = context)
+
+def user_logout(request):
+    logout(request)
+    messages.success(request,'logging out!!')
+    return redirect('home')
