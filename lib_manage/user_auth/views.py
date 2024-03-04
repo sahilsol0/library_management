@@ -3,8 +3,9 @@ from .forms import CreateUserForm, LoginForm
 from django.contrib import messages
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate,login,logout
+from .decorators import unauthenticated_user
 
-
+@unauthenticated_user
 def user_register(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
@@ -18,6 +19,7 @@ def user_register(request):
     context = {'registerform': form}
     return render(request, 'register.html',context = context)
 
+@unauthenticated_user
 def user_login(request):
     form = LoginForm()
     if request.method == 'POST':
