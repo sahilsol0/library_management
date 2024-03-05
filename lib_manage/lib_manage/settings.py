@@ -27,7 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'user_auth.apps.UserAuthConfig'
+    'user_auth.apps.UserAuthConfig',
+    'users.apps.UsersConfig',
+    'book.apps.BookConfig',
 ]
 
 MIDDLEWARE = [
@@ -114,3 +116,4 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
