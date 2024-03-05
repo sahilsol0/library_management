@@ -8,3 +8,4 @@ class Book(models.Model):
     published_date = models.DateField(auto_now=False, auto_now_add=False)
     title = models.CharField(max_length = 100)
     is_available = models.BooleanField(default = True)
+
