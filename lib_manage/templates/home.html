@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Libra-Library Management{% endblock title %}
 {% block navlinks %}
 <a class="mr-5 hover:text-white" href="/register">Register</a>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-        <img class="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
+        <img class="object-cover object-center rounded" alt="hero" src="{% static 'undraw_Bookshelves_re_lxoy.png' %}">
       </div>
     </div>
   </section>

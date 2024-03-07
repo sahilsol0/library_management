@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm
 from django import forms
 from django.forms.widgets import PasswordInput,TextInput
 
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username','email','password1','password2']
+        fields = ['first_name', 'last_name','username','email','password1','password2']
 
         widgets = {
             "username": TextInput(
@@ -40,3 +40,9 @@ class LoginForm(AuthenticationForm):
 
     username = forms.CharField(widget = TextInput())
     password = forms.CharField(widget = PasswordInput())
+
+class ForgotPasswordForm(PasswordResetForm):
+    email = forms.EmailField(required=True,max_length=254)
+    class Meta:
+        model = User
+        fields = ("email")
