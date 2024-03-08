@@ -116,5 +116,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST_PORT = 465
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'libre.com'
+EMAIL_HOST_PASSWORD = 'libre123'

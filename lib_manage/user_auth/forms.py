@@ -9,40 +9,48 @@ class CreateUserForm(UserCreationForm):
         fields = ['first_name', 'last_name','username','email','password1','password2']
 
         widgets = {
+             "first_name": TextInput(
+                attrs={
+                    "class": "border border-solid border-slate-300 text-slate-900",
+                    "placeholder": "first name",
+                }
+             ),
+             "last_name": TextInput(
+                attrs={
+                    "class": "border border-solid border-slate-300 text-slate-900",
+                    "placeholder": "last name",
+                }
+             ),
             "username": TextInput(
                 attrs={
-                    "class": "border border-solid border-slate-300",
+                    "class": "border border-solid border-slate-300 text-slate-900",
                     "placeholder": "username",
                 }
             ),
             "email": TextInput(
                 attrs={
-                    "class": "border border-solid border-slate-300",
+                    "class": "border border-solid border-slate-300 text-slate-900",
                     "placeholder": "youremail@somemail.com",
                 }
             ),
             "password1": TextInput(
                 attrs={
-                    "class": "border border-solid border-slate-300",
-                    "placeholder": "enter password",
+                    "class": "border border-solid border-slate-300 text-slate-900",
                 }
             ),
             "password2": TextInput(
                 attrs={
-                    "class": "border border-solid border-slate-300",
-                    "placeholder": "confirm password",
+                    "class": "border border-solid border-slate-300 text-slate-900",
                 }
             ),
         }
 
-
 class LoginForm(AuthenticationForm):
 
-    username = forms.CharField(widget = TextInput())
-    password = forms.CharField(widget = PasswordInput())
-
-class ForgotPasswordForm(PasswordResetForm):
-    email = forms.EmailField(required=True,max_length=254)
-    class Meta:
-        model = User
-        fields = ("email")
+    username = forms.CharField(widget = TextInput(attrs={
+                "class": "border border-solid border-slate-300 text-slate-900",
+                "placeholder": "username",
+            }))
+    password = forms.CharField(widget = PasswordInput(attrs={
+                "class": "border border-solid border-slate-300 text-slate-900",
+            }))
