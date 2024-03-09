@@ -11,7 +11,12 @@
 <form class="text" method="POST" autocomplete="off">
     {% csrf_token %}
 
-    {{loginform.as_p}}
+    {% for field in loginform %}
+        <label for="{{ field.label }}" class="">{{ field.label }}<span class="text-color10">*</span>:</label>
+        <div class="col-md-6">
+            {{ field }}
+        </div>
+    {% endfor %}
 
     <input class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg" href="{% url 'login' %}" type="submit" value="Login">
 </form>

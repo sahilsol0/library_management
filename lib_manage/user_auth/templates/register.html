@@ -9,8 +9,14 @@ already have an account ? <a href="{% url 'login' %}">login</a>
 <form method="POST" autocomplete="off">
     {% csrf_token %}
 
-    {{registerform.as_p}}
-    
+    {% comment %} {{registerform.as_p}} {% endcomment %}
+    {% for field in registerform %}
+        <label for="{{ field.label }}" class="">{{ field.label }}<span class="text-color10">*</span>:</label>
+        <div class="col-md-6">
+            {{ field }}
+        </div>
+    {% endfor %}
+
     <input class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg"  type="submit" value="register">
 </form>
 {% endblock content %}
