@@ -2,19 +2,16 @@
 
 {% block title %} {{user.first_name}}'s Dashboard{% endblock title %}
 {% block navlinks %}
-<a class="mr-5 hover:italic" href="{% url 'dashboard' %}">home</a>
+<a class="mr-8 hover:italic" href="{% url 'dashboard' %}">home</a>
 {% if user.groups.all.0.name == "librarian" %}
-<a class="mr-5 hover:italic" href="{% url 'dashboard' %}">view users</a>
-<a class="mr-5 hover:italic" href="{% url 'viewbooks' %}">manage books</a>
+<a class="mr-8 hover:italic" href="{% url 'dashboard' %}">view users</a>
+<a class="mr-8 hover:italic" href="{% url 'viewbooks' %}">manage books</a>
 {% else %}
-<a class="mr-5 hover:italic" href="{% url 'viewbooks' %}">view books</a>
-<a class="mr-5 hover:italic" href="{% url 'viewbooks' %}">search catalog</a>
+<a class="mr-8 hover:italic" href="{% url 'viewbooks' %}">view books</a>
+<a class="mr-8 hover:italic" href="{% url 'viewbooks' %}">search catalog</a>
 {% endif %}
-<a class="mr-5 hover:italic" href="{% url 'logout' %}">logout</a>
+<a class="mr-8 hover:italic" href="{% url 'logout' %}">logout</a>
 <button class="inline-flex items  -center bg-color10 text-color60 border-0 py-1 px-3 focus:outline-none hover:italic rounded text-xl mt-4 md:mt-0">{{user.username}}
-  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-    <path d="M5 12h14M12 5l7 7-7 7"></path>
-  </svg>
 </button>
 {% endblock navlinks %}
 {% block content %}

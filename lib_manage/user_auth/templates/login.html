@@ -21,8 +21,8 @@
             
                 <input class="mx-auto inline-flex bg-color10 text-color60 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-lg self-center" href="{% url 'login' %}" type="submit" value="Login">
             </form>
-            <p>forgot password ? <a href="{% url 'password-reset' %}">reset password</a></p>
-            <p>don't have an account ? <a href="{% url 'register' %}">register</a></p>
+            <p class="text-lg">forgot password ? <a href="{% url 'password-reset' %}" class="text-color10 text-xl hover:italic">reset password</a></p>
+            <p class="text-lg">don't have an account ? <a href="{% url 'register' %}" class="text-color10 text-xl hover:italic">register</a></p>
         </div>
     </div>
 {% endblock content %}

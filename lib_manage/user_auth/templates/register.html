@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block title %}register{% endblock title %}
+{% block title %}Register{% endblock title %}
 {% block navcontent %}
-<a href="/">home</a>
+<a href="/">Home</a>
 {% endblock navcontent %}
 {% block content %}
 <div class="container mx-auto flex justify-center">
@@ -10,9 +10,9 @@
         <br>
         <form method="POST" autocomplete="off">
             {% csrf_token %}
-        
-            {% comment %} {{registerform.as_p}} {% endcomment %}
+    
             {% for field in registerform %}
+                
                 <label for="{{ field.label }}" class="text-xl">{{ field.label }}<span class="text-color10">*</span>:
                 <div class="col-md-6 pb-2">
                     {{ field }}
@@ -21,7 +21,7 @@
         
             <input class="mx-auto inline-flex bg-color10 text-color60 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-lg self-center"  type="submit" value="register">
         </form>
-        <p>already have an account ? <a href="{% url 'login' %}">Login</a><p>
+        <p class="text-lg">already have an account ? <a href="{% url 'login' %}" class="text-color10 text-xl hover:italic">Login</a><p>
     </div>
 </div>
 {% endblock content %}

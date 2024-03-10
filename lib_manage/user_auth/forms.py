@@ -1,57 +1,41 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm
 from django import forms
-from django.forms.widgets import PasswordInput,TextInput
+from django.forms.widgets import TextInput
+from django.contrib.auth.forms import PasswordResetForm
 
 form_style = "bg-color60 w-full text-xl p-1 rounded"
 
 class CreateUserForm(UserCreationForm):
+    first_name = forms.CharField(max_length=50)
+    last_name = forms.CharField(max_length=50)
+    email = forms.EmailField()
     class Meta:
         model = User
         fields = ['first_name', 'last_name','username','email','password1','password2']
 
         widgets = {
-             "first_name": TextInput(
-                attrs={
-                    "id": "First name",
-                    "class": form_style,
-                    "placeholder": "first name",
-                }
-             ),
-             "last_name": TextInput(
-                attrs={
-                    "id": "Last name",
-                    "class": form_style,
-                    "placeholder": "last name",
-                }
-             ),
             "username": TextInput(
                 attrs={
-                    "id": "Username",
                     "class": form_style,
-                    "placeholder": "username",
-                }
-            ),
-            "email": TextInput(
-                attrs={
-                    "id": "Email address",
-                    "class": form_style,
-                    "placeholder": "youremail@somemail.com",
-                }
-            ),
-            "password1": TextInput(
-                attrs={
-                    "id": "Password",
-                }
-            ),
-            "password2": TextInput(
-                attrs={
-                    "id": "Password confirmation",
+                    "placeholder": "johnDoe45",
                 }
             ),
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["first_name"].widget.attrs.update({
+            "class": form_style,
+            "placeholder": "John",
+        })
+        self.fields["last_name"].widget.attrs.update({
+            "class": form_style,
+            "placeholder": "Doe",
+        })
+        self.fields["email"].widget.attrs.update({
+            "class": form_style,
+            "placeholder": "johndoe@anymail.com",
+        })
         self.fields["password1"].widget.attrs.update({
             "class": form_style,
         })
@@ -66,13 +50,20 @@ class LoginForm(AuthenticationForm):
                 "class": form_style,
                 "placeholder": "username",
             }))
-    password = forms.CharField(widget = PasswordInput(attrs={
-                "id": "Password",
-                "class": form_style,
-            }))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["password"].widget.attrs.update({
            "class": form_style,
         })
+
+class UserPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordResetForm, self).__init__(*args, **kwargs)
+
+    email = forms.EmailField(label='Enter email', widget=forms.EmailInput(attrs={
+        'class': form_style,
+        'placeholder': 'registered email',
+        'type': 'email',
+        'name': 'email',
+        }))
