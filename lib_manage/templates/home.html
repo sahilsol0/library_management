@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Libra-Library Management{% endblock title %}
+{% block title %}LiVRE-Library Management{% endblock title %}
 {% block navlinks %}
 {% endblock navlinks %}
 {% block content %}
@@ -12,8 +12,8 @@
       <p class="mb-8 leading-relaxed text-xl">In today's fast-paced world, managing a library can be a daunting task. From keeping track of your vast collection to meeting the ever-evolving needs of patrons, the challenges can seem endless. But what if we told you there's a solution that can revolutionize the way you run your library?
         <br>Introducing LiVRE, the ultimate library management system designed to streamline your operations and take your library to new heights.</p>
       <div class="flex justify-center">
-        <button class="inline-flex text-color30 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-lg">Register</button>
-        <button class="ml-4 inline-flex bg-color30 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-lg">Login</button>
+        <a href="{% url 'register' %}"><input class="ml-4 inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-lg" type="button" value="Register"></a>
+        <a href="{% url 'login' %}"><input class="ml-4 inline-flex text-colortxt bg-color30 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-lg" type="button" value="Login"></a>
       </div>
     </div>
   </div>
