@@ -15,12 +15,8 @@
 </button>
 {% endblock navlinks %}
 {% block content %}
-<h1>
-    {% if user.is_authenticated %}
-        <h1 class="text-6xl">Hello {{user.first_name}}</h1>
-        
-        <h1 class="text-2xl">{% if user.groups.all.0.name == 'librarian' %}Librarian account{% else %}Members account</h1>
-        {% endif %}
+    <h1 class="text-6xl">Hello {{user.first_name}}</h1>
+    
+    <h1 class="text-2xl">{% if user.groups.all.0.name == 'librarian' %}Librarian account{% else %}Members account</h1>
     {% endif %}
-</h1>
 {% endblock content %}

@@ -61,7 +61,7 @@ class UserPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
         super(UserPasswordResetForm, self).__init__(*args, **kwargs)
 
-    email = forms.EmailField(label='Enter email', widget=forms.EmailInput(attrs={
+    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={
         'class': form_style,
         'placeholder': 'registered email',
         'type': 'email',

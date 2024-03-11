@@ -2,10 +2,10 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 
 def home_page(request):
-    if not request.user.is_authenticated:
-        return render(request, 'home.html')
-    else:
+    if request.user.is_authenticated:
         return redirect('dashboard')
+    else:
+        return render(request,'home.html')
 
 def about_page(request):
     return render(request, 'about.html')
