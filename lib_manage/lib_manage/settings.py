@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     'user_auth.apps.UserAuthConfig',
     'book.apps.BookConfig',
+    'transaction.apps.TransactionConfig',
 ]
 
 MIDDLEWARE = [
