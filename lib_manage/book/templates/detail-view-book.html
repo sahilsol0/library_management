@@ -1,0 +1,16 @@
+{% extends "dashboard.html" %}
+
+{% block title %}update books{% endblock title %}
+{% block content %}
+<h2 class="text-4xl">{{book.title}}</h2>
+<p class="text-xl">Published: {{book.published_date}}</p>
+<p class="text-xl">Added: {{book.added_date}}</p>
+<p class="text-xl">{{book.language}}</p>
+<p class="text-xl">{{book.ISBN}}</p>
+<p class= "text-xl">{{ book.count }} {% if book.count > 1 %} copies {% else %} copy{% endif %} present in library</p>
+<br>
+{% if user.groups.all.0.name == 'librarian' %}
+<a class="mr-8 text-2xl hover:italic" href="{% url 'updatebook' book.id %}">Edit book information</a>
+<a class="mr-8 text-2xl hover:italic" href="{% url 'deletebook' book.id %}">Delete book</a>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends "dashboard.html" %}
+
+{% block title %}Delete book{% endblock title %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        Are you sure you want to delete this book ?
+        <input type="submit" value="Yes, delete" />
+        <a href="{% url "viewbook" %}">Cancel </a>
+    </form>
+{% endblock content %}

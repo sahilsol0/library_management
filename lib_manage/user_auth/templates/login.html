@@ -11,7 +11,6 @@
             <form method="POST" autocomplete="off">
                 {% csrf_token %}
             
-                {% comment %} {{registerform.as_p}} {% endcomment %}
                 {% for field in loginform %}
                     <label for="{{ field.label }}" class="text-xl">{{ field.label }}<span class="text-color10">*</span>:
                     <div class="col-md-6 pb-2">

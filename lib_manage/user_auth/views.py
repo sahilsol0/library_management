@@ -14,6 +14,8 @@ def user_register(request):
             form.save()
             messages.success(request,'Account created successfully!!')
             return redirect("login")
+        else:
+            messages.info(request,'Invalid registration details')
     else:
         form = CreateUserForm()
 
@@ -34,6 +36,8 @@ def user_login(request):
                 login(request,user)
                 messages.success(request,'logging in...')
                 return redirect('dashboard')
+            else:
+                messages.info(request,'Invalid login details')
     context = {'loginform':form}
     return render(request, 'login.html',context = context)
 

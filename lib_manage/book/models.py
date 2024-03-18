@@ -5,6 +5,7 @@ import django
 # Create your models here.
 class Author(models.Model):
     name = models.CharField(max_length = 100, default = 'author')
+    books = models.ManyToManyField('Book', through='BookAuthor')
     def __str__(self):
         return self.name
 
@@ -20,23 +21,18 @@ class Publisher(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length = 100, default = 'bookname with edition')
+    authors = models.ManyToManyField('Author', through='BookAuthor')
+    publisher = models.ManyToManyField(Publisher, related_name='publishers')
     published_date = models.DateField(auto_now=False, auto_now_add=False, default = datetime.date(1990, 10,10))
-    added_date = models.DateField(auto_now=False, auto_now_add=False, default = datetime.date.today())
     ISBN = models.CharField(max_length = 100, null = True,blank = True)
     language = models.CharField(max_length = 100, null = True, blank = True)
+    category = models.ManyToManyField(Category, related_name='categories')
+    added_date = models.DateField(auto_now=False, auto_now_add=False, default = datetime.date.today())
     count = models.PositiveIntegerField( default = 1)
 
     def __str__(self):
         return self.title
-
-class BookCategory(models.Model):
-    book = models.ForeignKey(Book,on_delete = models.CASCADE)
-    category = models.ForeignKey(Category, on_delete = models.CASCADE)
-
+    
 class BookAuthor(models.Model):
-    book = models.ForeignKey(Book,on_delete = models.CASCADE)
+    book = models.ForeignKey(Book, on_delete = models.CASCADE)
     author = models.ForeignKey(Author, on_delete = models.CASCADE)
-
-class BookPublisher(models.Model):
-    book = models.ForeignKey(Book,on_delete = models.CASCADE)
-    publisher = models.ForeignKey(Publisher,on_delete = models.CASCADE)
