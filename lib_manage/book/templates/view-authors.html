@@ -1,0 +1,31 @@
+{% extends "dashboard.html" %}
+
+{% block title %}View Authors{% endblock title %}
+{% block content %}
+<h1 class="px-8 pb-4 text-4xl">Author List</h1>
+{% if user.groups.all.0.name == 'librarian' %}
+<form class="px-8 text-2xl" method="POST">
+    {% csrf_token %}
+    {{ addauthorform.as_p }}
+    <input class="mt-4 inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="submit" value="Add Author">
+  </form>
+{% endif %}
+<div class="h-8"></div>
+<table class="text-xl pt-8">
+    <thead>
+        <th class="px-8">Author</th>
+    </thead>
+    <tbody>
+        {% for author in allauthors %}
+            <tr>
+                <td class="px-8 text-2xl">{{author.name}}</td>
+                <td class="pl-4"><a class="mr-8 text-xl underline hover:italic" href="{% url 'updateauthor' author.id %}">Edit</a></td>
+                <td class="pl-4"><a class="mr-8 text-xl underline hover:italic" href="{% url 'deleteauthor' author.id %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
+
+
+

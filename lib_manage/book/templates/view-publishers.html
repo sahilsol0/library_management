@@ -1,0 +1,28 @@
+{% extends "dashboard.html" %}
+
+{% block title %}View Publisher{% endblock title %}
+{% block content %}
+<h1 class="px-8 pb-4 text-4xl">Publishers</h1>
+{% if user.groups.all.0.name == 'librarian' %}
+<form class="px-8 text-2xl" method="POST">
+    {% csrf_token %}
+    {{ addpublisherform.as_p }}
+    <input class="mt-4 inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="submit" value="Add new Publisher">
+</form>
+{% endif %}
+<div class="h-8"></div>
+<table class="text-xl pt-8">
+    <thead>
+        <th class="px-8">Publisher name</th>
+    </thead>
+    <tbody>
+        {% for publisher in allpublishers %}
+            <tr>
+                <td class="px-8 text-2xl">{{publisher.name}}</td>
+                <td class="px-4"><a class="mr-8 text-xl underline hover:italic" href="{% url 'updatepublisher' publisher.id %}">Edit</a></td>
+                <td class="px-4"><a class="mr-8 text-xl underline hover:italic" href="{% url 'deletepublisher' publisher.id %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

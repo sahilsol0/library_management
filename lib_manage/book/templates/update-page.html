@@ -1,0 +1,11 @@
+{% extends "dashboard.html" %}
+
+{% block title %}Update {{title}}{% endblock title %}
+{% block content %}
+<h1 class="text-4xl">Update {{title}}</h1>
+<form class="mt-8 text-2xl" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input class="text-color10 text-2xl hover:italic" type="submit" value="Update {{title}}">
+</form>
+{% endblock content %}
