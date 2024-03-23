@@ -2,10 +2,31 @@
 
 {% block title %}Add a Book{% endblock title %}
 {% block content %}
-<h1 class="text-2xl">Add an Book</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ addbookform.as_p }}
-    <input type="submit" value="Add">
-  </form>
+<div class="container mx-auto flex justify-center">
+  <div class="w-16 bg-color10 rounded-l-lg"></div>
+  <div class="flex flex-col bg-color30 mx-0 px-8 py-4 rounded-r-lg w-2/5 justify-self-start">
+      <h1 class="text-4xl">Add a book</h1>
+      <br>
+      <form method="POST">
+          {% csrf_token %}
+          {% for field in addbookform %}
+              <label for="{{ field.label }}" class="text-xl">{{ field.label }}<span class="text-color10">*</span>:
+              {% if field.label == 'Authors' %}
+              <p class="text-sm">Select from below, hold down CTRL/CMD to select multiple. *<a class="text-color10 font-semibold text-lg hover:italic" href={% url "viewauthor" %}>add a new author</a> </p>
+              {% endif %}
+              {% if field.label == 'Publisher' %}
+              <p class="text-sm">Select from below, hold down CTRL/CMD to select multiple. *<a class="text-color10 font-semibold text-lg hover:italic" href={% url "viewpublisher" %}>add a new publisher</a> </p>
+              {% endif %}
+              {% if field.label == 'Category' %}
+              <p class="text-sm">Select from below, hold down CTRL/CMD to select multiple. *<a class="text-color10 font-semibold text-lg hover:italic" href={% url "viewcategory" %}>add a new category</a> </p>
+              {% endif %}
+              <div class="col-md-6 pb-2">
+                {{ field }}
+              </div>
+          {% endfor %}
+      
+          <input class="mx-auto inline-flex bg-color10 text-color60 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-lg self-center"  type="submit" value="Add to library">
+      </form>
+  </div>
+</div>
 {% endblock content %}

@@ -2,7 +2,10 @@
 
 {% block title %}View Publisher{% endblock title %}
 {% block content %}
-<h1 class="px-8 pb-4 text-4xl">Publishers</h1>
+<h1 class="px-8 pb-4 text-4xl text-center">Publishers</h1>
+<div class="container mx-auto flex justify-center">
+
+    <div class="flex flex-col bg-color30 mx-0 px-8 py-4 rounded-lg w-2/5 justify-self-start">
 {% if user.groups.all.0.name == 'librarian' %}
 <form class="px-8 text-2xl" method="POST">
     {% csrf_token %}
@@ -25,4 +28,6 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
+</div>
 {% endblock content %}

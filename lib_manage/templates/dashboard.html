@@ -2,12 +2,12 @@
 
 {% block title %} {{user.first_name}}'s Dashboard{% endblock title %}
 {% block navlinks %}
-<a class="mr-8 hover:italic" href="{% url 'dashboard' %}">home</a>
+<a class="mr-8 hover:italic" href="{% url 'dashboard' %}">Home</a>
 {% if user.groups.all.0.name == "librarian"%}
-<a class="mr-8 hover:italic" href="{% url 'dashboard' %}">view users</a>
-<a class="mr-8 hover:italic" href="{% url 'viewbook' %}">View books</a>
+<a class="mr-8 hover:italic" href="{% url 'dashboard' %}">Users</a>
+<a class="mr-8 hover:italic" href="{% url 'viewbook' %}">Books</a>
 {% else %}
-<a class="mr-8 hover:italic" href="{% url 'viewbook' %}">search catalog</a>
+<a class="mr-8 hover:italic" href="{% url 'viewbook' %}">Search catalog</a>
 {% endif %}
 <a class="mr-8 hover:italic" href="{% url 'logout' %}">logout</a>
 <button class="inline-flex items  -center bg-color10 text-color60 border-0 py-1 px-3 focus:outline-none hover:italic rounded text-xl mt-4 md:mt-0">{{user.username}}

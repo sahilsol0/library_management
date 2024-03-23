@@ -23,7 +23,7 @@ class Book(models.Model):
     title = models.CharField(max_length = 100, default = 'bookname with edition')
     authors = models.ManyToManyField('Author', through='BookAuthor')
     publisher = models.ManyToManyField(Publisher, related_name='publishers')
-    published_date = models.DateField(auto_now=False, auto_now_add=False, default = datetime.date(1990, 10,10))
+    published_year = models.IntegerField(default = 1950)
     ISBN = models.CharField(max_length = 100, null = True,blank = True)
     language = models.CharField(max_length = 100, null = True, blank = True)
     category = models.ManyToManyField(Category, related_name='categories')

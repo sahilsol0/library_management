@@ -14,8 +14,6 @@ def user_register(request):
             form.save()
             messages.success(request,'Account created successfully!!')
             return redirect("login")
-        else:
-            messages.info(request,'Invalid registration details')
     else:
         form = CreateUserForm()
 

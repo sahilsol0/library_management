@@ -2,10 +2,14 @@
 
 {% block title %}Update {{title}}{% endblock title %}
 {% block content %}
-<h1 class="text-4xl">Update {{title}}</h1>
-<form class="mt-8 text-2xl" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input class="text-color10 text-2xl hover:italic" type="submit" value="Update {{title}}">
-</form>
+<h1 class="text-4xl text-center mb-4">Update {{title}}</h1>
+<div class="container mx-auto flex justify-center">
+    <div class="flex flex-col bg-color30 mx-0 px-8 py-4 rounded-lg w-2/5 justify-self-start">
+        <form class="mt-8 text-2xl" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="mt-4 align-self-bottom inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="submit" value="Update {{title}}">
+        </form>
+    </div>
+</div>
 {% endblock content %}
