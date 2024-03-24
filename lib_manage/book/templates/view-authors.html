@@ -6,7 +6,7 @@
 
 <div class="container mx-auto flex justify-center">
 
-    <div class="flex flex-col bg-color30 mx-0 px-8 py-4 rounded-lg w-2/5 justify-self-start">
+    <div class="flex flex-col bg-color30 mx-0 px-8 py-4 rounded-lg w-3/5 justify-self-start">
     {% if user.groups.all.0.name == 'librarian' %}
     <form class="px-8 text-2xl flex" method="POST">
         {% csrf_token %}
@@ -23,10 +23,10 @@
     </thead>
     <tbody>
         {% for author in allauthors %}
-            <tr>
+            <tr class="border-b-2 hover:bg-color60 hover:h-16">
                 <td class="px-8 text-2xl">{{author.name}}</td>
-                <td class="pl-4"><a class="mr-8 text-xl underline hover:italic" href="{% url 'updateauthor' author.id %}">Edit</a></td>
-                <td class="pl-4"><a class="mr-8 text-xl underline hover:italic" href="{% url 'deleteauthor' author.id %}">Delete</a></td>
+                <td class="pl-4"><a class="mr-8 text-color10 underline hover:italic" href="{% url 'updateauthor' author.id %}">Edit</a></td>
+                <td class="pl-4"><a class="mr-8 text-color10 underline hover:italic" href="{% url 'deleteauthor' author.id %}">Delete</a></td>
             </tr>
         {% endfor %}
     </tbody>

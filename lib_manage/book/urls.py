@@ -16,4 +16,5 @@ urlpatterns = [
     path("viewpublisher/", views.view_publisher_all, name="viewpublisher"),
     path("viewpublisher/<id>/deletepublisher/", views.delete_publisher, name="deletepublisher"),
     path("viewpublisher/<id>/updatepublisher/", views.update_publisher, name="updatepublisher"),
+    path("downloads/",views.downloads,name="downloads"),
 ]

@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.http import HttpRequest,HttpResponse
 from .models import Book, Author, BookAuthor,Publisher,Category
 from .decorators import user_is_librarian
+import pandas as pd
+import json
 
 # Create your views here.
 @login_required(login_url = 'login')
@@ -150,3 +152,13 @@ def update_category(request,id):
         return redirect("/viewcategory/")
     context = {'form': form,'title':'Category'}
     return render(request, 'update-page.html',context = context)
+
+@login_required(login_url = 'login')
+def downloads(request):
+    df = pd.read_csv("static/downloadbook.csv")
+    json_records = df.reset_index().to_json(orient ='records') 
+    data = [] 
+    data = json.loads(json_records) 
+    context = {'books': data }
+
+    return render(request, 'downloads.html', context) 
