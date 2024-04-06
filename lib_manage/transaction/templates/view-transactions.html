@@ -1,0 +1,28 @@
+{% extends "dashboard.html" %}
+
+{% block title %}View Transactions{% endblock title %}
+{% block content %}
+<h1 class="px-8 pb-4 text-4xl">Transactions</h1>
+<table class="text-xl mx-4 my-8 pt-8 w-full">
+    <thead>
+        <th class="px-4 text-left">Transaction ID</th>
+        <th class="px-4 text-center">Student</th>
+        <th class="px-4 text-center">Book</th>
+        <th class="px-4 text-center">Issued</th>
+        <th class="px-4 text-center">Return</th>
+        <th class="px-4 text-center">Fine</th>
+    </thead>
+    <tbody class="text-2xl ">
+        {% for transaction in alltransactions %}
+            <tr class="border-b-2 h-12 hover:bg-color30 hover:h-16">
+                <td class="px-4 text-left">{{transaction.id}}</td>
+                <td class="px-4 text-center">{{transaction.student}}</td>
+                <td class="px-4 text-center">{{transaction.book}}</td>
+                <td class="px-4 text-center">{{transaction.issued_date}}</td>
+                <td class="px-4 text-center">{{transaction.returned_date}}</td>
+                <td class="px-4 text-center">{{transaction.late_fee}}</td>
+                </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

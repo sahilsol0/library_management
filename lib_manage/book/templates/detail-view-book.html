@@ -1,16 +1,22 @@
 {% extends "dashboard.html" %}
 
-{% block title %}update books{% endblock title %}
+{% block title %}Update books{% endblock title %}
 {% block content %}
-<h2 class="text-4xl">{{book.title}}</h2>
-<p class="text-xl">Published: {{book.published_date}}</p>
-<p class="text-xl">Added: {{book.added_date}}</p>
-<p class="text-xl">{{book.language}}</p>
-<p class="text-xl">{{book.ISBN}}</p>
-<p class= "text-xl">{{ book.count }} {% if book.count > 1 %} copies {% else %} copy{% endif %} present in library</p>
-<br>
-{% if user.groups.all.0.name == 'librarian' %}
-<a class="mr-8 text-2xl hover:italic" href="{% url 'updatebook' book.id %}">Edit book information</a>
-<a class="mr-8 text-2xl hover:italic" href="{% url 'deletebook' book.id %}">Delete book</a>
+<div class="container mx-auto flex justify-center">
+<div class="flex flex-col bg-color30 mx-0 p-8 rounded-xl w-2/5 h-120 justify-self-start">
+    <h2 class="text-5xl font-semibold text-textcolor opacity-70 mb-2">{{book.title}}</h2>
+    <h2 class="text-3xl font-semibold text-textcolor opacity-70 mb-8">By {% for a in author %}{{a.name}}, {% endfor %}</h2>
+    <br>
+    <p class="text-xl font-semibold">Published: <span class="italic font-thin">{{book.published_year}}</span></p>
+    <p class="text-xl font-semibold">Date added: <span class="italic font-thin">{{book.added_date}}</span></p>
+    <p class="text-xl font-semibold">Lang: <span class="italic font-thin">{{book.language}}</span></p>
+    <p class="text-xl font-semibold">ISBN: <span class="italic font-thin">{{book.ISBN}}</span></p>
+    <p class= "text-xl">{{ book.count }} {% if book.count > 1 %} copies {% else %} copy{% endif %} present in library</p>
+    <br>
+    {% if user.groups.all.0.name == 'librarian' %}
+    <a class=" w-3/4 my-4 text-2xl text-color10 font-semibold text-center place-self-left bg-color60 rounded-lg border-2 border-color10 hover:italic" href="{% url 'updatebook' book.id %}">Edit book information</a>
+    <a class=" w-3/4 text-2xl text-color10 font-semibold text-center place-self-left bg-color60 rounded-lg border-2 border-color10 hover:italic" href="{% url 'deletebook' book.id %}">Delete book from database</a>
+</div>
+</div>
 {% endif %}
 {% endblock content %}

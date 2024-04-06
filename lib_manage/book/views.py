@@ -7,11 +7,18 @@ from .models import Book, Author, BookAuthor,Publisher,Category
 from .decorators import user_is_librarian
 import pandas as pd
 import json
+from django.db.models import Q
+from django.views.generic import ListView
+
 
 # Create your views here.
 @login_required(login_url = 'login')
 def view_book_all(request):
-    all_books = Book.objects.all()
+    query = request.GET.get('search')
+    if query:
+        all_books = Book.objects.filter( Q(title__icontains = query) | Q(ISBN__icontains = query) | Q(language__icontains = query) | Q(added_date__icontains = query))
+    else:
+        all_books = Book.objects.all().order_by("-added_date")
     context = {'allbooks':all_books,}
     return render(request, 'view-books.html',context = context)
 
@@ -19,6 +26,7 @@ def view_book_all(request):
 def view_book(request,id):
     context = {
         "book": Book.objects.get(id = id),
+        "author": Author.objects.filter(books = id).values(),
     }
     return render(request, 'detail-view-book.html',context = context)
 
@@ -160,5 +168,5 @@ def downloads(request):
     data = [] 
     data = json.loads(json_records) 
     context = {'books': data }
-
-    return render(request, 'downloads.html', context) 
+    return render(request, 'downloads.html', context)
+    

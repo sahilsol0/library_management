@@ -5,28 +5,25 @@
 <h1 class="px-8 pb-4 text-4xl text-center">Authors</h1>
 
 <div class="container mx-auto flex justify-center">
-
-    <div class="flex flex-col bg-color30 mx-0 px-8 py-4 rounded-lg w-3/5 justify-self-start">
+    <div class="flex flex-col bg-color30 mx-0 p-8 rounded-lg w-3/5">
     {% if user.groups.all.0.name == 'librarian' %}
-    <form class="px-8 text-2xl flex" method="POST">
+    <form class="px-8 text-2xl" method="POST">
         {% csrf_token %}
+        {{ addauthorform.non_field_errors }}
         {{ addauthorform.as_p }}
         
-        <input class="mt-4 ml-4 align-self-bottom inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="submit" value="Add Author">
+        <input class="mt-4 align-self-bottom inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="submit" value="Add Author">
     </form>
     {% endif %}
-
-<div class="h-8"></div>
-<table class="text-xl pt-8">
+<table class="text-xl mt-8 mx-4">
     <thead>
-        <th class="px-8">Author</th>
+        <th class="px-4 text-left">Author</th>
     </thead>
     <tbody>
         {% for author in allauthors %}
-            <tr class="border-b-2 hover:bg-color60 hover:h-16">
-                <td class="px-8 text-2xl">{{author.name}}</td>
-                <td class="pl-4"><a class="mr-8 text-color10 underline hover:italic" href="{% url 'updateauthor' author.id %}">Edit</a></td>
-                <td class="pl-4"><a class="mr-8 text-color10 underline hover:italic" href="{% url 'deleteauthor' author.id %}">Delete</a></td>
+            <tr class="border-b-2 h-12 hover:bg-color60 hover:h-16">
+                <td class="pl-4 text-2xl">{{author.name}}</td>
+                <td class="text-right pr-4"><a class="mr-4 text-color10 underline hover:italic" href="{% url 'updateauthor' author.id %}">Edit</a>|<a class="ml-4 text-color10 underline hover:italic" href="{% url 'deleteauthor' author.id %}">Delete</a></td>
             </tr>
         {% endfor %}
     </tbody>

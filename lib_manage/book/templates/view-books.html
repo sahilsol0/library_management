@@ -3,26 +3,34 @@
 {% block title %}View books{% endblock title %}
 {% block content %}
 <h1 class="px-8 pb-4 text-4xl">Books Catalogue</h1>
-{% if user.groups.all.0.name == 'librarian' %}
-<a href="{% url 'addbook' %}"><input class="ml-8 inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="button" value="Add new Book"></a>
-<a href="{% url 'viewauthor' %}"><input class="ml-4 inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="button" value="Add new Author"></a>
-<a href="{% url 'viewpublisher' %}"><input class="ml-4 inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="button" value="Add new Publisher"></a>
-<a href="{% url 'viewcategory' %}"><input class="ml-4 inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="button" value="Add new Category"></a>
-{% endif %}
-<div class="h-8"></div>
-<table class="text-xl pt-8">
+<div class="ml-8 mt-8 w-3/5 grid grid-cols-4 grid-rows-3 gap-4 justify-items-stretch">
+    {% if user.groups.all.0.name == 'librarian' %}
+    <a href="{% url 'addbook' %}" class="h-12 place-self-stretch inline-flex justify-center items-center text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl">Add new Book</a>
+    <a href="{% url 'viewauthor' %}" class="h-12 place-self-stretch inline-flex justify-center items-center text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl">Add new Author</a>
+    <a href="{% url 'viewpublisher' %}" class="h-12 place-self-stretch inline-flex justify-center items-center text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl">Add new Publisher</a>
+    <a href="{% url 'viewcategory' %}" class="h-12 place-self-stretch inline-flex justify-center items-center text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl">Add new Category</a>
+    {% endif %}
+    <form action="{% url "viewbook" %}" method="get" class="flex items-center text-2xl col-span-4 w-full">
+        <label for="search" class="text-color10 font-semibold">Search:</label>
+        <input class="bg-color30 w-full text-xl p-2 ml-4 rounded focus:outline-4 outline-color10" placeholder="search..." type="search" name="search" id="search">
+        <input class="bg-color10 text-color60 text-xl p-2 px-8 ml-4 rounded focus:outline-4 outline-color10" placeholder="search..." type="submit" value="Search">
+    </form>
+</div>
+<table class="text-xl mx-4 my-8 pt-8 w-full">
     <thead>
-        <th class="px-8">Title</th>
-        <th class="px-8">Lang</th>
-        <th class="px-8">ISBN</th>
+        <th class="px-4 text-left">Title</th>
+        <th class="px-4 text-center">Lang</th>
+        <th class="px-4 text-center">ISBN</th>
+        <th class="px-4 text-center">Added</th>
     </thead>
-    <tbody class="text-2xl">
+    <tbody class="text-2xl ">
         {% for book in allbooks %}
-            <tr class="border-b-2 hover:bg-color30 hover:h-16">
-                <td class="px-8">{{book.title}}</td>
-                <td class="px-8">{{book.language}}</td>
-                <td class="px-8">{{book.ISBN}}</td>
-                <td class="px-8 text-xl"><a class="mr-8 underline hover:italic" href="{% url "detailviewbook" book.id %}">view more...</a></td>
+            <tr class="border-b-2 h-12 hover:bg-color30 hover:h-16">
+                <td class="px-4">{{book.title}}</td>
+                <td class="text-left">{{book.language}}</td>
+                <td class="text-left">{{book.ISBN}}</td>
+                <td class="text-left">{{book.added_date}}</td>
+                <td class=" text-xl text-left"><a class=" underline text-color10 hover:italic" href="{% url "detailviewbook" book.id %}">view more...</a></td>
             </tr>
         {% endfor %}
     </tbody>

@@ -9,4 +9,5 @@ urlpatterns = [
     path('', include('user_auth.urls')),
     path('dashboard/',views.dashboard_view, name = "dashboard"),
     path('', include('book.urls')),
+    path('', include('transaction.urls')),
 ]

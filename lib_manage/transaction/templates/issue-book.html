@@ -1,0 +1,17 @@
+{% extends "dashboard.html" %}
+
+{% block title %}Issue a Book{% endblock title %}
+{% block content %}
+<div class="container mx-auto flex justify-center">
+  <div class="w-16 bg-color10 rounded-l-lg"></div>
+  <div class="flex flex-col bg-color30 mx-0 px-8 py-4 rounded-r-lg w-2/5 justify-self-start">
+      <h1 class="text-4xl">Issue a book</h1>
+      <br>
+      <form method="POST">
+          {% csrf_token %}
+          {{issuebookform}}
+          <input class="mx-auto inline-flex bg-color10 text-color60 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-lg self-center"  type="submit" value="Issue">
+      </form>
+  </div>
+</div>
+{% endblock content %}

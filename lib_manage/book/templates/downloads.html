@@ -3,23 +3,23 @@
 {% block title %}Downloads{% endblock title %}
 {% block content %}
 <h1 class="px-8 pb-4 text-4xl text-center">Download books</h1>
-<table class="text-xl pt-8 w-full">
+<table class="text-xl mx-4 pt-8 w-full">
     <thead>
-        <th class="px-8">Title</th>
-        <th class="px-8">Author</th>
-        <th class="px-8">Download Link</th>
+        <th class="px-4 text-left">Title</th>
+        <th class="px-4 text-center">Author</th>
+        <th class="px-4 text-right">Download Link</th>
     </thead>
     <tbody>
         {% for book in books %}
-            <tr class="border-b-2 hover:bg-color30 hover:h-16">
-                <td class="px-8 text-2xl">{{book.Name}}</td>
-                <td class="px-8 text-2xl text-center">{{book.Author}}</td>
-                <td class="px-8 text-2xl text-right"><a href="{{book.Download_link}}" target="_blank" class="text-color10 text-lg hover:italic">Download {{book.Name}}</td>
+            <tr class="border-b-2 h-12 hover:bg-color30 hover:h-16">
+                <td class="mx-8 px-4 text-2xl">{{book.Name}}</td>
+                <td class="mx-8 px-4 text-2xl text-center">{{book.Author}}</td>
+                <td class="mx-8 px-4 text-2xl text-right"><a href="{{book.Download_link}}" target="_blank" class="text-color10 text-lg hover:italic">Download {{book.Name}}</td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
-<p class="text-2xl my-8">Read and download more free ebooks at <a class="text-color10 hover:italic" href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></p>
+<p class="text-2xl my-8">Read and download more free ebooks at <a class="text-color10 hover:italic" href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a>, <a class="text-color10 hover:italic" href="https://ebookfoundation.github.io/free-programming-books-search/?&sect=books&file=free-programming-books-subjects.md" target="_blank">free-programming-books</a></p>
 </div>
 </div>
 {% endblock content %}

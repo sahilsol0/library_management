@@ -4,26 +4,24 @@
 {% block content %}
 <h1 class="px-8 pb-4 text-4xl text-center">Categories</h1>
 <div class="container mx-auto flex justify-center">
-
-    <div class="flex flex-col bg-color30 mx-0 px-8 py-4 rounded-lg w-3/5 justify-self-start">
+<div class="flex flex-col bg-color30 mx-0 p-8 rounded-lg w-3/5 justify-self-start">
 {% if user.groups.all.0.name == 'librarian' %}
 <form class="px-8 text-2xl" method="POST">
     {% csrf_token %}
+    {{addcategoryform.non_field_errors}}
     {{ addcategoryform.as_p }}
     <input class="mt-4 text-xl inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded" type="submit" value="Add new Category">
   </form>
 {% endif %}
-<div class="h-8"></div>
-<table class="text-xl pt-8">
+<table class="text-xl mt-8 mx-4">
     <thead>
-        <th class="px-8">Category name</th>
+        <th class="px-4 text-left">Category name</th>
     </thead>
     <tbody class = "text-2xl">
         {% for category in allcategories %}
-            <tr class="border-b-2 hover:bg-color60 hover:h-16">
-                <td class="px-8">{{category.name}}</td>
-                <td class="px-4 text-xl"><a class="mr-8 text-color10 underline hover:italic" href="{% url 'updatecategory' category.id %}">Edit</a></td>
-                <td class="px-4 text-xl"><a class="mr-8 text-color10 underline hover:italic" href="{% url 'deletecategory' category.id %}">Delete</a></td>
+            <tr class="border-b-2 h-12 hover:bg-color60 hover:h-16">
+                <td class="px-4">{{category.name}}</td>
+                <td class="px-4 text-xl text-right"><a class="mr-4 text-color10 underline hover:italic" href="{% url 'updatecategory' category.id %}">Edit</a>|<a class="ml-4 text-color10 underline hover:italic" href="{% url 'deletecategory' category.id %}">Delete</a></td>
             </tr>
         {% endfor %}
     </tbody>

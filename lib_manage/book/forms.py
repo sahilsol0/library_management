@@ -2,7 +2,8 @@ from django import forms
 from .models import Book,Author,Publisher,Category
 from .widgets import DatePickerInput, MultipleSelectDropDown
 
-form_style = "bg-color60 w-full text-xl p-1 rounded"
+form_style = "bg-color60 w-full text-xl p-2 rounded mb-6 focus:outline-2 outline-color10"
+form_style2 = "bg-color60 w-full text-xl p-2 rounded mb-0 focus:outline-2 outline-color10"
 
 class CreateBookForm(forms.ModelForm):
     class Meta:
@@ -44,7 +45,7 @@ class CreateAuthorForm(forms.ModelForm):
         fields = ['name']
         widgets = {
             'name': forms.TextInput(attrs = {
-                'class': form_style,
+                'class': form_style2,
             })
         }
 
@@ -54,7 +55,7 @@ class CreatePublisherForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'name': forms.TextInput(attrs = {
-                'class': form_style,
+                'class': form_style2,
             })
         }
 
@@ -65,6 +66,6 @@ class CreateCategoryForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'name': forms.TextInput(attrs = {
-                'class': form_style,
+                'class': form_style2,
             })
         }

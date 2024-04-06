@@ -4,7 +4,7 @@
 {% block navlinks %}
 <a class="mr-8 hover:italic" href="{% url 'dashboard' %}">Home</a>
 {% if user.groups.all.0.name == "librarian"%}
-<a class="mr-8 hover:italic" href="{% url 'dashboard' %}">Users</a>
+<a class="mr-8 hover:italic" href="{% url 'viewtransactions' %}">Transactions</a>
 {% endif %}
 <a class="mr-8 hover:italic" href="{% url 'viewbook' %}">Books</a>
 <a class="mr-8 hover:italic" href="{% url 'downloads' %}">Downloads</a>

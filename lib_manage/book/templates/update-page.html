@@ -3,11 +3,23 @@
 {% block title %}Update {{title}}{% endblock title %}
 {% block content %}
 <h1 class="text-4xl text-center mb-4">Update {{title}}</h1>
-<div class="container mx-auto flex justify-center">
-    <div class="flex flex-col bg-color30 mx-0 px-8 py-4 rounded-lg w-2/5 justify-self-start">
-        <form class="mt-8 text-2xl" method="POST">
+<div class="container  mx-auto flex justify-center">
+    <div class="flex flex-col bg-color30 mx-0 p-8 rounded-lg w-2/5 justify-self-start">
+        <form class=" text-2xl " method="POST">
             {% csrf_token %}
-            {{form.as_p}}
+            {% for field in form %}
+            <label for="{{ field.label }}" class="text-xl">{{ field.label }}<span class="text-color10">*</span>:
+            {% if field.label == 'Authors' %}
+              <p class="text-sm">Select from below, hold down CTRL/CMD to select multiple. *<a class="text-color10 font-semibold text-lg hover:italic" href={% url "viewauthor" %}>add a new author</a> </p>
+              {% endif %}
+              {% if field.label == 'Publisher' %}
+              <p class="text-sm">Select from below, hold down CTRL/CMD to select multiple. *<a class="text-color10 font-semibold text-lg hover:italic" href={% url "viewpublisher" %}>add a new publisher</a> </p>
+              {% endif %}
+              {% if field.label == 'Category' %}
+              <p class="text-sm">Select from below, hold down CTRL/CMD to select multiple. *<a class="text-color10 font-semibold text-lg hover:italic" href={% url "viewcategory" %}>add a new category</a> </p>
+              {% endif %}
+            {{field}}
+            {% endfor %}
             <input class="mt-4 align-self-bottom inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="submit" value="Update {{title}}">
         </form>
     </div>

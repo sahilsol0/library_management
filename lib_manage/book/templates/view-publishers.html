@@ -5,25 +5,25 @@
 <h1 class="px-8 pb-4 text-4xl text-center">Publishers</h1>
 <div class="container mx-auto flex justify-center">
 
-<div class="flex flex-col bg-color30 mx-0 px-8 py-4 rounded-lg w-3/5 justify-self-start">
+<div class="flex flex-col bg-color30 mx-0 p-8 rounded-lg w-3/5 justify-self-start">
 {% if user.groups.all.0.name == 'librarian' %}
 <form class="px-8 text-2xl" method="POST">
     {% csrf_token %}
+    {{ addpublisherform.non_field_errors }}
     {{ addpublisherform.as_p }}
     <input class="mt-4 inline-flex text-color60 bg-color10 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-xl" type="submit" value="Add new Publisher">
 </form>
 {% endif %}
-<div class="h-8"></div>
-<table class="text-xl pt-8">
+
+<table class="text-xl mt-8 mx-4">
     <thead>
-        <th class="px-8">Publisher name</th>
+        <th class="px-4 text-left">Publisher name</th>
     </thead>
     <tbody>
         {% for publisher in allpublishers %}
-            <tr class="border-b-2 hover:bg-color60 hover:h-16">
-                <td class="px-8 text-2xl">{{publisher.name}}</td>
-                <td class="px-4"><a class="mr-8 text-color10 underline hover:italic" href="{% url 'updatepublisher' publisher.id %}">Edit</a></td>
-                <td class="px-4"><a class="mr-8 text-color10 underline hover:italic" href="{% url 'deletepublisher' publisher.id %}">Delete</a></td>
+            <tr class="border-b-2 h-12 hover:bg-color60 hover:h-16">
+                <td class="px-4 text-2xl">{{publisher.name}}</td>
+                <td class="px-4 text-right"><a class="mr-4 text-color10 underline hover:italic" href="{% url 'updatepublisher' publisher.id %}">Edit</a>|<a class="ml-4 text-color10 underline hover:italic" href="{% url 'deletepublisher' publisher.id %}">Delete</a></td>
             </tr>
         {% endfor %}
     </tbody>
