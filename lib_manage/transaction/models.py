@@ -1,42 +1,32 @@
 from django.db import models
 from book.models import Book
 from django.contrib.auth.models import User
-import datetime
+from datetime import timedelta,date,datetime
 from django.db.models.functions import ExtractDay
 
 # Create your models here.
-def get_fine(issue_date,returned_date):
-        d = (datetime.date(returned_date) - datetime.date(issue_date)).days
-        return d
+def dueDate(issue_date):
+  valid_days = 15
+  due_date = issue_date + timedelta(days=valid_days)
+  return due_date
 
-def to_be_returned_by(issued_date):
-      pass
+def dues(due_date, return_date):
+  fine_per_day = 1 #after the due date,returning book a fine calculated 1 rupee each day after the due date untill return
+  due = 0
+  if return_date >= due_date:
+    due = (return_date - due_date).days * fine_per_day
+  return due
+
 
 class Transaction(models.Model):
-    student = models.ForeignKey(User, on_delete = models.CASCADE)
-    book = models.ForeignKey(Book, on_delete = models.CASCADE)
-    issued_date = models.DateField(auto_now=False, auto_now_add=False,default = datetime.date(2024,1,1))
-    due_date = models.DateField(auto_now=False, auto_now_add=False,default = datetime.date(2024,1,1))
-    returned_date = models.DateField(auto_now=False, auto_now_add=False,default= to_be_returned_by(issued_date))
-    late_fee = models.IntegerField(null=True)
+  student = models.ForeignKey(User, on_delete = models.CASCADE)
+  book = models.ForeignKey(Book, on_delete = models.CASCADE)
+  issued_date = models.DateField(auto_now=False, auto_now_add=False,default = date(2024,1,1))
+  due_date = models.DateField(auto_now=False, auto_now_add=False,null=True,default= date(2024,1,1))
+  returned_date = models.DateField(auto_now=False, auto_now_add=False,null=True)
+  due = models.IntegerField(null=True)
 
-"""
-TODO
-make two models borrow and return
-borrow
--student id
--staff id
--book id
--issue_date
--due_date
-
-return
--student id
--staff id
--book id
--returned_date
--due_date
--fine
-
-improve this.....👿
-"""
+  def save(self,*args, **kwargs):
+      self.due_date = dueDate(self.issued_date)
+      self.due = dues(self.due_date, self.returned_date)
+      super(Transaction,self).save(*args, **kwargs)

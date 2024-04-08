@@ -9,7 +9,15 @@
       <br>
       <form method="POST">
           {% csrf_token %}
-          {{returnbookform}}
+          <p>{{returnbookform.student.label}}</p>
+          {{returnbookform.student}}
+          <p>{{returnbookform.book.label}}</p>
+          {{returnbookform.book}}
+          <p>{{returnbookform.issued_date.label}}</p>
+          {{returnbookform.issued_date}}
+          <p>{{returnbookform.returned_date.label}}</p>
+          {{returnbookform.returned_date}}
+          <br>
           <input class="mx-auto inline-flex bg-color10 text-color60 border-0 py-2 px-6 focus:outline-none hover:italic rounded text-lg self-center"  type="submit" value="Submit">
       </form>
   </div>

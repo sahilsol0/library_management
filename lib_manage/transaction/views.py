@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,HttpResponseRedirect,get_object_or_404
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.http import HttpRequest,HttpResponse
-from .models import Transaction
+from .models import Transaction, Book
 from .forms import IssueBookForm
 from book.decorators import user_is_librarian
 from django.db.models import Q
@@ -18,12 +18,22 @@ def view_transaction(request):
 def issue_book(request):
     if request.method == 'POST':
         form = IssueBookForm(request.POST)
-        if form.is_valid():
+        book = get_object_or_404(Book, id = form['book'].value())
+        if form.is_valid() and book.count >= 1:
             form.save()
-            Transaction.late_fee = ExtractDay(Transaction.issued_date,Transaction.returned_date)
             return redirect("/viewtransactions")
     else:
         form = IssueBookForm()
 
-    context = {'issuebookform':form}
+    context = {'issuebookform':form,}
     return render(request, 'issue-book.html',context=context)
+
+@user_passes_test(user_is_librarian,login_url='login',redirect_field_name='dashboard')
+def return_book(request, id):
+    transaction = get_object_or_404(Transaction, id = id)
+    form = IssueBookForm(request.POST or None, instance = transaction)
+    if form.is_valid():
+        form.save()
+        return redirect("/returnbook/"+id)
+    context = {'returnbookform': form,}
+    return render(request, 'return-book.html',context=context)

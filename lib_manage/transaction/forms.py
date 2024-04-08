@@ -7,4 +7,4 @@ form_style2 = "bg-color60 w-full text-xl p-2 rounded mb-0 focus:outline-2 outlin
 class IssueBookForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ['student', 'book', 'issued_date', 'returned_date']
+        fields = [ 'student' , 'book', 'issued_date', 'due_date', 'returned_date']
