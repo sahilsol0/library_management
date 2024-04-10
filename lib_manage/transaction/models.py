@@ -11,7 +11,7 @@ def dueDate(issue_date):
   return due_date
 
 def dues(due_date, return_date):
-  fine_per_day = 1 #after the due date,returning book a fine calculated 1 rupee each day after the due date untill return
+  fine_per_day = 2 #after the due date,returning book a fine calculated 1 rupee each day after the due date untill return
   due = 0
   if return_date >= due_date:
     due = (return_date - due_date).days * fine_per_day
@@ -21,12 +21,15 @@ def dues(due_date, return_date):
 class Transaction(models.Model):
   student = models.ForeignKey(User, on_delete = models.CASCADE)
   book = models.ForeignKey(Book, on_delete = models.CASCADE)
-  issued_date = models.DateField(auto_now=False, auto_now_add=False,default = date(2024,1,1))
-  due_date = models.DateField(auto_now=False, auto_now_add=False,null=True,default= date(2024,1,1))
-  returned_date = models.DateField(auto_now=False, auto_now_add=False,null=True)
-  due = models.IntegerField(null=True)
+  issued_date = models.DateField(auto_now=False, auto_now_add=False,default = datetime.now())
+  due_date = models.DateField(auto_now=False, auto_now_add=False,null=True,blank=True)
+  returned_date = models.DateField(auto_now=False, auto_now_add=False,null=True,blank=True)
+  due = models.IntegerField(null=True,blank=True)
 
   def save(self,*args, **kwargs):
-      self.due_date = dueDate(self.issued_date)
+    self.due_date = dueDate(self.issued_date)
+    if self.returned_date:
       self.due = dues(self.due_date, self.returned_date)
-      super(Transaction,self).save(*args, **kwargs)
+    else:
+      self.due = 0
+    super(Transaction,self).save(*args, **kwargs)

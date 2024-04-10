@@ -34,6 +34,9 @@ class CreateBookForm(forms.ModelForm):
             'added_date': DatePickerInput(attrs = {
                 'class': form_style,
             }),
+            'shelf_no': forms.NumberInput(attrs = {
+                'class': form_style,
+            }),
             'count': forms.NumberInput(attrs = {
                 'class': form_style,
             }),

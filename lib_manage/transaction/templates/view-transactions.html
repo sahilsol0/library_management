@@ -3,14 +3,24 @@
 {% block title %}View Transactions{% endblock title %}
 {% block content %}
 <h1 class="px-8 pb-4 text-4xl">Transactions</h1>
-<table class="text-xl mx-4 my-8 pt-8 w-full">
+<div class="ml-8">
+{% comment %} <a href="{% url 'issuebook' %}" class="h-12 place-self-stretch inline-flex justify-center items-center text-color60 bg-color10 border-0 py-2 px-6 mr-2 focus:outline-none hover:italic rounded text-xl">Renew Book</a> {% endcomment %}
+</div>
+<form action="{% url "viewtransactions" %}" method="get" class="flex items-center text-2xl w-2/5 mx-8">
+    <label for="search" class="text-color10 font-semibold">Search:</label>
+    <input class="bg-color30 w-full text-xl p-2 ml-4 rounded focus:outline-4 outline-color10" placeholder="search..." type="search" name="search" id="search">
+    <input class="bg-color10 text-color60 text-xl p-2 px-8 ml-4 rounded focus:outline-4 outline-color10" placeholder="search..." type="submit" value="Search">
+</form>
+<table class="text-xl mx-4 my-16 pt-8 w-full">
     <thead>
-        <th class="px-4 text-left">Transaction ID</th>
+        <th class="px-4 text-left">ID</th>
         <th class="px-4 text-center">Student</th>
         <th class="px-4 text-center">Book</th>
         <th class="px-4 text-center">Issued</th>
-        <th class="px-4 text-center">Return</th>
+        <th class="px-4 text-center">Return by</th>
+        <th class="px-4 text-center">Returned</th>
         <th class="px-4 text-center">Fine</th>
+        <th class="px-4 text-right">more...</th>
     </thead>
     <tbody class="text-2xl ">
         {% for transaction in alltransactions %}
@@ -19,8 +29,11 @@
                 <td class="px-4 text-center">{{transaction.student}}</td>
                 <td class="px-4 text-center">{{transaction.book}}</td>
                 <td class="px-4 text-center">{{transaction.issued_date}}</td>
+                <td class="px-4 text-center">{{transaction.due_date}}</td>
                 <td class="px-4 text-center">{{transaction.returned_date}}</td>
-                <td class="px-4 text-center">{{transaction.late_fee}}</td>
+                <td class="px-4 text-center">₹{{transaction.due}}</td>
+                <td class="px-4 text-right"><a href="{% url 'returnbook' transaction.id%}" class="h-10 place-self-stretch inline-flex justify-center items-center text-color60 bg-color10 border-0 py-2 px-4 focus:outline-none hover:italic rounded text-xl">Return/Renew</a>
+                </td>
                 </tr>
         {% endfor %}
     </tbody>

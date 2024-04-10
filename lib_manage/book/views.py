@@ -27,6 +27,8 @@ def view_book(request,id):
     context = {
         "book": Book.objects.get(id = id),
         "author": Author.objects.filter(books = id).values(),
+        "publisher": Publisher.objects.filter(publishers = id).values(),
+        "category": Category.objects.filter(categories = id).values(),
     }
     return render(request, 'detail-view-book.html',context = context)
 

@@ -10,20 +10,29 @@ from django.db.models.functions import ExtractDay
 # Create your views here.
 @login_required(login_url='login')
 def view_transaction(request):
-    all_transactions = Transaction.objects.all()
+    query = request.GET.get('search')
+    if query:
+        all_transactions = Transaction.objects.filter(Q(id__icontains = query) | Q(returned_date__icontains = query))
+    else:
+        all_transactions = Transaction.objects.all().order_by('-due')
     context = {'alltransactions':all_transactions,}
     return render(request, 'view-transactions.html',context = context)
 
 @user_passes_test(user_is_librarian,login_url='login',redirect_field_name='dashboard')
-def issue_book(request):
+def issue_book(request, id):
+    book = get_object_or_404(Book, id = id)
     if request.method == 'POST':
         form = IssueBookForm(request.POST)
-        book = get_object_or_404(Book, id = form['book'].value())
-        if form.is_valid() and book.count >= 1:
+        if form.is_valid():
+            print('save')
             form.save()
             return redirect("/viewtransactions")
+        else:
+            print('book not available')
     else:
-        form = IssueBookForm()
+        form = IssueBookForm(initial={
+            'book': book,
+        })
 
     context = {'issuebookform':form,}
     return render(request, 'issue-book.html',context=context)
@@ -34,6 +43,6 @@ def return_book(request, id):
     form = IssueBookForm(request.POST or None, instance = transaction)
     if form.is_valid():
         form.save()
-        return redirect("/returnbook/"+id)
+        return redirect("/viewtransactions")
     context = {'returnbookform': form,}
     return render(request, 'return-book.html',context=context)

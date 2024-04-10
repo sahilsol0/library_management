@@ -28,6 +28,7 @@ class Book(models.Model):
     language = models.CharField(max_length = 100, null = True, blank = True)
     category = models.ManyToManyField(Category, related_name='categories')
     added_date = models.DateField(auto_now=False, auto_now_add=False, default = datetime.date.today())
+    shelf_no = models.PositiveIntegerField( null=True, blank=True)
     count = models.PositiveIntegerField( default = 1)
 
     def __str__(self):
