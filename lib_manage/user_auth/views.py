@@ -5,13 +5,21 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate,login,logout
 from .decorators import authenticated_user
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView,PasswordResetCompleteView
+from django.contrib.auth.models import Group,User
+from django.db.models. signals import post_save
+from django.dispatch import receiver
+
+def profile(request):
+    return render(request, 'profile.html')
 
 @authenticated_user
 def user_register(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            group = Group.objects.all()[1]
+            user.groups.add(group)
             messages.success(request,'Account created successfully!!')
             return redirect("login")
     else:
@@ -43,3 +51,8 @@ def user_logout(request):
     logout(request)
     messages.success(request,'logging out!!')
     return redirect('home')
+
+# @receiver(post_save, sender=User)
+# def add_to_group(sender, instance, created, ** kwargs):
+#     if created:
+#         pass

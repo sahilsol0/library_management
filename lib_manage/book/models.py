@@ -1,21 +1,22 @@
 from django.db import models
 import datetime
 import django
+from django.utils import timezone
 
 # Create your models here.
 class Author(models.Model):
-    name = models.CharField(max_length = 100, default = 'author')
+    name = models.CharField(max_length = 100, default = 'author', unique=True)
     books = models.ManyToManyField('Book', through='BookAuthor')
     def __str__(self):
         return self.name
 
 class Category(models.Model):
-    name = models.CharField(max_length = 100, default = 'category or genre')
+    name = models.CharField(max_length = 100, default = 'category or genre', unique= True)
     def __str__(self):
         return self.name
 
 class Publisher(models.Model):
-    name = models.CharField(max_length = 100, default = 'publisher name')
+    name = models.CharField(max_length = 100, default = 'publisher name',unique=True)
     def __str__(self):
         return self.name
 
@@ -27,7 +28,7 @@ class Book(models.Model):
     ISBN = models.CharField(max_length = 100, null = True,blank = True)
     language = models.CharField(max_length = 100, null = True, blank = True)
     category = models.ManyToManyField(Category, related_name='categories')
-    added_date = models.DateField(auto_now=False, auto_now_add=False, default = datetime.date.today())
+    added_date = models.DateField(auto_now=False, auto_now_add=False, default = timezone.now().date())
     shelf_no = models.PositiveIntegerField( null=True, blank=True)
     count = models.PositiveIntegerField( default = 1)
 

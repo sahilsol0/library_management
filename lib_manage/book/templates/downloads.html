@@ -11,10 +11,10 @@
     </thead>
     <tbody>
         {% for book in books %}
-            <tr class="border-b-2 h-12 hover:bg-color30 hover:h-16">
-                <td class="mx-8 px-4 text-2xl">{{book.Name}}</td>
+            <tr class="border-b-2 h-16 transition delay-150 ease-in-out hover:border-color10 {% cycle "bg-color30" "bg-color60" %}">
+                <td class="mx-8 px-4 text-2xl"><a href="{{book.Download_link}}" target="_blank" class="text-textcolor hover:underline hover:text-color10">{{book.Name}}</a></td>
                 <td class="mx-8 px-4 text-2xl text-center">{{book.Author}}</td>
-                <td class="mx-8 px-4 text-2xl text-right"><a href="{{book.Download_link}}" target="_blank" class="text-color10 text-lg hover:italic">Download {{book.Name}}</td>
+                <td class="mx-8 px-4 text-2xl text-right"><a href="{{book.Download_link}}" target="_blank" class="text-color10 text-lg hover:italic">Download {{book.Name}}</a></td>
             </tr>
         {% endfor %}
     </tbody>

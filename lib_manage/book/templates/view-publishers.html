@@ -21,7 +21,7 @@
     </thead>
     <tbody>
         {% for publisher in allpublishers %}
-            <tr class="border-b-2 h-12 hover:bg-color60 hover:h-16">
+            <tr class="border-b-2 h-16 transition ease-in-out delay-100 hover:bg-color60">
                 <td class="px-4 text-2xl">{{publisher.name}}</td>
                 <td class="px-4 text-right"><a class="mr-4 text-color10 underline hover:italic" href="{% url 'updatepublisher' publisher.id %}">Edit</a>|<a class="ml-4 text-color10 underline hover:italic" href="{% url 'deletepublisher' publisher.id %}">Delete</a></td>
             </tr>

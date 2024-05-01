@@ -3,6 +3,7 @@ from book.models import Book
 from django.contrib.auth.models import User
 from datetime import timedelta,date,datetime
 from django.db.models.functions import ExtractDay
+from django.utils import timezone
 
 # Create your models here.
 def dueDate(issue_date):
@@ -21,7 +22,7 @@ def dues(due_date, return_date):
 class Transaction(models.Model):
   student = models.ForeignKey(User, on_delete = models.CASCADE)
   book = models.ForeignKey(Book, on_delete = models.CASCADE)
-  issued_date = models.DateField(auto_now=False, auto_now_add=False,default = datetime.now())
+  issued_date = models.DateField(auto_now=False, auto_now_add=False,default = timezone.now().date())
   due_date = models.DateField(auto_now=False, auto_now_add=False,null=True,blank=True)
   returned_date = models.DateField(auto_now=False, auto_now_add=False,null=True,blank=True)
   due = models.IntegerField(null=True,blank=True)

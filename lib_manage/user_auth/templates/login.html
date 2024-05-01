@@ -10,7 +10,7 @@
             <br>
             <form method="POST" autocomplete="off">
                 {% csrf_token %}
-                {{loginform.non_field_errors}}
+                <p class="text-color10">{{loginform.non_field_errors}}</p>
                 {% for field in loginform %}
                     <label for="{{ field.label }}" class="text-xl">{{ field.label }}<span class="text-color10">*</span>:
                     <div class="col-md-6 pb-2">

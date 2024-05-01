@@ -1,0 +1,17 @@
+{% extends "dashboard.html" %}
+
+{% block title %}{{user.first_name}}'s Profile{% endblock title %}
+{% block content %}
+
+<div class="bg-color30 w-4/5 h-96 ml-8 my-8 rounded-xl px-8 py-6 relative md:w-2/5 h-auto">
+    <ul class="text-lg md:text-2xl">
+        <li class="font-medium text-4xl">{{user.first_name | title}}</li>
+        <li class="text-4xl mb-8">{{user.last_name | title}}</li>
+        <li><span class="font-medium">Username:</span> {{user.username}}</li>
+        <li>{{user.email}}</li>
+        <li>Joined: {{user.date_joined | date }}</li>
+        <li class="absolute bottom-0 right-0 text-7xl px-6 py-4"><span class="text-xl">ID:</span>{{user.id}}</li>
+    </ul>
+</div>
+<a class="ml-8 text-2xl bg-color30 px-8 py-2 rounded-xl border-2 border-color10 transition delay-150 ease-in-out hover:bg-color10 hover:text-color60" href="{% url 'logout' %}">Logout</a>
+{% endblock content %}

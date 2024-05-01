@@ -21,7 +21,7 @@
     </thead>
     <tbody>
         {% for author in allauthors %}
-            <tr class="border-b-2 h-12 hover:bg-color60 hover:h-16">
+            <tr class="border-b-2 h-16 transition ease-in-out delay-100 hover:bg-color60">
                 <td class="pl-4 text-2xl">{{author.name}}</td>
                 <td class="text-right pr-4"><a class="mr-4 text-color10 underline hover:italic" href="{% url 'updateauthor' author.id %}">Edit</a>|<a class="ml-4 text-color10 underline hover:italic" href="{% url 'deleteauthor' author.id %}">Delete</a></td>
             </tr>

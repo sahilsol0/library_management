@@ -2,15 +2,16 @@
 
 {% block title %}View Transactions{% endblock title %}
 {% block content %}
-<h1 class="px-8 pb-4 text-4xl">Transactions</h1>
+
+<h1 class="p-8 text-4xl">Transactions</h1>
 <div class="ml-8">
-{% comment %} <a href="{% url 'issuebook' %}" class="h-12 place-self-stretch inline-flex justify-center items-center text-color60 bg-color10 border-0 py-2 px-6 mr-2 focus:outline-none hover:italic rounded text-xl">Renew Book</a> {% endcomment %}
 </div>
-<form action="{% url "viewtransactions" %}" method="get" class="flex items-center text-2xl w-2/5 mx-8">
+<form action="{% url "viewtransactions" %}" method="get" class="flex items-center text-2xl w-2/5 mx-8 mb-8">
     <label for="search" class="text-color10 font-semibold">Search:</label>
     <input class="bg-color30 w-full text-xl p-2 ml-4 rounded focus:outline-4 outline-color10" placeholder="search..." type="search" name="search" id="search">
     <input class="bg-color10 text-color60 text-xl p-2 px-8 ml-4 rounded focus:outline-4 outline-color10" placeholder="search..." type="submit" value="Search">
 </form>
+<a href="{% url "downloadtransactions" %}" class="px-8 text-color10 text-xl underline hover:italic">Download Transaction Report</a>
 <table class="text-xl mx-4 my-16 pt-8 w-full">
     <thead>
         <th class="px-4 text-left">ID</th>
@@ -24,17 +25,17 @@
     </thead>
     <tbody class="text-2xl ">
         {% for transaction in alltransactions %}
-            <tr class="border-b-2 h-12 hover:bg-color30 hover:h-16">
+            <tr class="border-b-2 h-16 transition ease-in-out delay-100 hover:border-color10 {% cycle "bg-color30" "bg-color60" %}">
                 <td class="px-4 text-left">{{transaction.id}}</td>
                 <td class="px-4 text-center">{{transaction.student}}</td>
-                <td class="px-4 text-center">{{transaction.book}}</td>
+                <td class="px-4 text-center">{{transaction.book | truncatewords:4 }}</td>
                 <td class="px-4 text-center">{{transaction.issued_date}}</td>
                 <td class="px-4 text-center">{{transaction.due_date}}</td>
                 <td class="px-4 text-center">{{transaction.returned_date}}</td>
                 <td class="px-4 text-center">₹{{transaction.due}}</td>
-                <td class="px-4 text-right"><a href="{% url 'returnbook' transaction.id%}" class="h-10 place-self-stretch inline-flex justify-center items-center text-color60 bg-color10 border-0 py-2 px-4 focus:outline-none hover:italic rounded text-xl">Return/Renew</a>
+                <td class="px-4 text-right">{% if not transaction.returned_date %}<a href="{% url 'returnbook' transaction.id%}" class="h-10 place-self-stretch inline-flex justify-center items-center text-color60 bg-color10 border-0 py-2 px-4 focus:outline-none hover:italic rounded text-xl">Return/Renew</a>{% else %} Returned{% endif %}
                 </td>
-                </tr>
+            </tr>
         {% endfor %}
     </tbody>
 </table>

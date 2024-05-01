@@ -20,17 +20,15 @@
     <thead>
         <th class="px-4 text-left">Title</th>
         <th class="px-4 text-center">Lang</th>
-        <th class="px-4 text-center">ISBN</th>
         <th class="px-4 text-center">Added</th>
     </thead>
     <tbody class="text-2xl ">
         {% for book in allbooks %}
-            <tr class="border-b-2 h-12 hover:bg-color30 hover:h-16">
-                <td class="px-4">{{book.title}}</td>
-                <td class="text-left">{{book.language}}</td>
-                <td class="text-left">{{book.ISBN}}</td>
-                <td class="text-left">{{book.added_date}}</td>
-                <td class=" text-xl text-left"><a class=" underline text-color10 hover:italic" href="{% url "detailviewbook" book.id %}">view more...</a></td>
+            <tr class="border-b-2 h-16 hover:bg-color30 transition ease-in-out delay-100 hover:h-16">
+                <td class="px-4">{{book.title | truncatewords:6}}</td>
+                <td class="text-center">{{book.language}}</td>
+                <td class="text-center">{{book.added_date}}</td>
+                <td class=" text-xl text-center"><a class=" underline text-color10 hover:italic" href="{% url "detailviewbook" book.id %}">view more...</a></td>
             </tr>
         {% endfor %}
     </tbody>

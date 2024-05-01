@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load qr_code %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,7 +39,7 @@
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
 <body class="bg-color60	text-colortxt font-serif flex flex-col justify-content-center px-4 sm:px-8">
   <header class=" body-font ">
-    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <div class="container mx-auto flex flex-wrap px-12 py-6 flex-col md:flex-row items-center fixed top-0 left-0 backdrop-blur">
       <a class="flex title-font font-medium items-center text-textcolor mb-4 md:mb-0">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 22" stroke-width="1.5" class="w-6 h-6 stroke-color10">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
@@ -50,10 +51,10 @@
       </nav>
     </div>
   </header>
-  <main class="flex-1 grow">
+  <main class="flex-1 grow mt-24">
     {% block content %}{% endblock content %}
   </main>
-  <footer class="text-textcolor body-font flex-none">
+  <footer class="text-textcolor body-font flex-none absolute bottom-0">
     <div class="container px-4 py-8 mx-auto flex items-center sm:flex-row flex-col">
       <a class="flex title-font font-medium items-center md:justify-start justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-6 h-6 stroke-color10">
